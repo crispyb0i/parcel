@@ -1,13 +1,18 @@
 require('sinatra')
 require('sinatra/reloader')
-# require('./lib/rock_paper_scissors')
+require('./lib/parcel')
 also_reload('lib/**/*.rb')
 
 get('/') do
   erb(:index)
 end
 
-get('/title') do
-  # @title = (params.fetch('title1')).rps()
-  erb(:title)
+get('/show') do
+  width = params.fetch('width').to_i()
+  length = params.fetch('length').to_i()
+  height = params.fetch('height').to_i()
+  weight = params.fetch('weight').to_i()
+  speed = params[:speed]
+  @new_parcel = Parcel.new(width, length, height, weight, speed)
+  erb(:show)
 end
